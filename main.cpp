@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include "FaultCalculator.h"
+#include <iomanip>
 
 std::default_random_engine generator;
 std::normal_distribution<double> distribution(10.0, 2.0);
@@ -14,6 +15,12 @@ int normal()
 {
     int number = (int)(distribution(generator));
     return number;
+}
+
+template <typename T>
+void printColumn(T t, const int &width)
+{
+    std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
 }
 
 int main(int argc, char *argv[])
@@ -35,11 +42,17 @@ int main(int argc, char *argv[])
             // Determine and accumulate the number of page
             // faults for each algorithm base on the current
             // working set size and the current trace.
-            LRUResults  [wss] += LRU  ( wss, data );
-            FIFOResults [wss] += FIFO ( wss, data );
-            ClockResults[wss] += Clock( wss, data );
+            LRUResults[wss] += LRU(wss, data);
+            FIFOResults[wss] += FIFO(wss, data);
+            ClockResults[wss] += Clock(wss, data);
         }
     }
+
+    printColumn("wss", 7);
+    printColumn("LRU", 10);
+    printColumn("FIFO", 10);
+    printColumn("Clock", 10);
+    std::cout << std::endl;
 
     for (int wss = 4; wss <= 20; wss++)
     {
@@ -48,10 +61,10 @@ int main(int argc, char *argv[])
         double FIFOAverageFaults = (double)FIFOResults[wss] / 1000;
         double ClockAverageFaults = (double)ClockResults[wss] / 1000;
 
-        printf("wss=%d \t LRU:%f \t\t FIFO:%f \t\t Clock:%f \n", 
-        wss, 
-        LRUAverageFaults, 
-        FIFOAverageFaults, 
-        ClockAverageFaults);
+        printColumn(wss, 7);
+        printColumn(LRUAverageFaults, 10);
+        printColumn(FIFOAverageFaults, 10);
+        printColumn(ClockAverageFaults, 10);
+        std::cout << std::endl;
     }
 }
