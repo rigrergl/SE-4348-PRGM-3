@@ -20,18 +20,43 @@ int LRUResults[21];   //number of page faults using LRU
 int FIFOResults[21];  //number of page faults using FIFO
 int ClockResults[21]; //number of page faults using Clock
 
+/***************************************************************************  
+* int normal()
+* Author: Rigre Garciandia 
+* Date:  21 November 2021  
+* Description: returns a random number with normal deviation using mean 10 and SD of 2
+* Parameters: none
+**************************************************************************/
 int normal()
 {
     int number = (int)(distribution(generator));
     return number;
 }
 
-template <typename T>
-void printColumn(T t, const int &width)
+/***************************************************************************  
+* template <typename T> void printColumn(T t, const int &width)
+* Author: Rigre Garciandia 
+* Date:  21 November 2021  
+* Description: prints a column to console of specified width 
+* Parameters:  
+*   t       I/P T   The object to print  
+*   width   I/P int The specified width   
+**************************************************************************/
+template <typename T> void printColumn(T t, const int &width)
 {
     std::cout << std::left << std::setw(width) << std::setfill(' ') << t;
 }
 
+/***************************************************************************  
+* int main( int argc, char *argv[] ) 
+* Author: Rigre Garciandia  
+* Date:  21 November 2021 
+* Description: test program which runs the Monte Carlo Simulation  
+* Parameters:  
+*   argc I/P int  The number of arguments on the command line  
+*   argv I/P char *[] The arguments on the command line  
+*   main O/P int  Status code (not currently used)  
+**************************************************************************/
 int main(int argc, char *argv[])
 {
     for (int i = 0; i < 1000; i++) // Experiments loop

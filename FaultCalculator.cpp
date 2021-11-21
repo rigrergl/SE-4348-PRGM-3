@@ -16,6 +16,15 @@
 #include <sstream>
 using namespace std;
 
+/***************************************************************************  
+* int LRU (int workingSetSize, int trace[1000]);
+* Author: Rigre Garciandia 
+* Date:  21 November 2021  
+* Description: runs the test using the LRU replacement algorithm  
+* Parameters:  
+*   workingSetSize       I/P int   the amount of pages  
+*   trace                I/P int[] the trace of page numbers for this experiment 
+**************************************************************************/
 int LRU(int workingSetSize, int trace[1000])
 {
     int pageFaults = 0;
@@ -59,6 +68,15 @@ int LRU(int workingSetSize, int trace[1000])
     return pageFaults;
 }
 
+/***************************************************************************  
+* int FIFO (int workingSetSize, int trace[1000]);
+* Author: Rigre Garciandia 
+* Date:  21 November 2021  
+* Description: runs the test using the FIFO replacement algorithm  
+* Parameters:  
+*   workingSetSize       I/P int   the amount of pages  
+*   trace                I/P int[] the trace of page numbers for this experiment 
+**************************************************************************/
 int FIFO(int workingSetSize, int trace[1000])
 {
     int pageFaults = 0;
@@ -93,7 +111,19 @@ int FIFO(int workingSetSize, int trace[1000])
 //Stuff below this line was sourced from: https://www.geeksforgeeks.org/second-chance-or-clock-page-replacement-policy/
 // This code is contributed by NikhilRathor
 
-//if page is found, updates the second change bit to true
+/***************************************************************************  
+* static bool findAndUpdate(int x, int arr[],
+*                          bool second_chance[], int frames)
+* Author: NikhilRathor 
+* Date:  21 November 2021  
+* Description: if page is found, updates the second change bit to true
+* Parameters:  
+*   x               I/P int   new page
+*   arr             I/P int[] the trace of page numbers for this experiment
+*   second_chance   I/P int[] array keeping track of second change bits
+*   frames          I/P int   amount of frames in the current experiment
+*   pointer         I/P int   index of the next available frame
+**************************************************************************/
 static bool findAndUpdate(int x, int arr[],
                           bool second_chance[], int frames)
 
@@ -119,7 +149,19 @@ static bool findAndUpdate(int x, int arr[],
     return false;
 }
 
-// Updates the page in memory and returns the pointer
+/***************************************************************************  
+* static int replaceAndUpdate(int x, int arr[],
+*                            bool second_chance[], int frames, int pointer)
+* Author: NikhilRathor 
+* Date:  21 November 2021  
+* Description: Updates the page in memory and returns the pointer 
+* Parameters:  
+*   x               I/P int   new page
+*   arr             I/P int[] the trace of page numbers for this experiment
+*   second_chance   I/P int[] array keeping track of second change bits
+*   frames          I/P int   amount of frames in the current experiment
+*   pointer         I/P int   index of the next available frame
+**************************************************************************/
 static int replaceAndUpdate(int x, int arr[],
                             bool second_chance[], int frames, int pointer)
 {
@@ -145,6 +187,15 @@ static int replaceAndUpdate(int x, int arr[],
     }
 }
 
+/***************************************************************************  
+* int Clock (int workingSetSize, int trace[1000]);
+* Author: Rigre Garciandia 
+* Date:  21 November 2021  
+* Description: runs the test using the Clock replacement algorithm  
+* Parameters:  
+*   workingSetSize       I/P int   the amount of pages  
+*   trace                I/P int[] the trace of page numbers for this experiment 
+**************************************************************************/
 int Clock(int frames, int trace[])
 {
     int pointer, i, l = 1000, x, pf;
