@@ -75,15 +75,13 @@ int FIFO(int workingSetSize, int trace[1000])
 
 int Clock(int workingSetSize, int trace[1000])
 {
-    printf("Clock called \n");
-
     int pageFaults = 0;
     std::unordered_set<int> currentPages;
     std::unordered_map<int, bool> pageBits;
 
     for (int i = 0; i < 1000; i++) //trace loop
     {
-        if (currentPages.size() > workingSetSize &&
+        if (currentPages.size() >= workingSetSize &&
             currentPages.find(trace[i]) == currentPages.end()) //we must remove a page
         {
             //iterate through currentPages until you find a page with a bit of 0. Remove that page
