@@ -1,3 +1,12 @@
+/*************************************************************************** 
+ * File: main.cpp
+ * Author: Rigre Garciandia
+ * Procedures:  
+ * main   - test program which runs the Monte Carlo Simulation  
+ * normal - returns a random number with normal deviation using mean 10 and SD of 2
+ * printColumn - prints a column to console of specified width 
+***************************************************************************/
+
 #include <string.h>
 #include <iostream>
 #include <random>

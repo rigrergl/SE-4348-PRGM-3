@@ -1,3 +1,13 @@
+/*************************************************************************** 
+ * File: FaultCalculator.cpp
+ * Authors: Rigre Garciandia, NikhilRathor
+ * Procedures:  
+ * LRU                 - runs the test using the LRU replacement algorithm 
+ * FIFO                - runs the test using the FIFO replacement algorithm 
+ * findAndUpdate       - if page is found, updates the second change bit to true
+ * replaceAndUpdate    - Updates the page in memory and returns the pointer
+ * Clock               - runs the test using the Clock replacement algorithm 
+***************************************************************************/
 #include "FaultCalculator.h"
 #include <bits/stdc++.h>
 
@@ -78,6 +88,12 @@ int FIFO(int workingSetSize, int trace[1000])
     return pageFaults;
 }
 
+
+////////////////////////////////////////////////////////////////////
+//Stuff below this line was sourced from: https://www.geeksforgeeks.org/second-chance-or-clock-page-replacement-policy/
+// This code is contributed by NikhilRathor
+
+//if page is found, updates the second change bit to true
 static bool findAndUpdate(int x, int arr[],
                           bool second_chance[], int frames)
 
