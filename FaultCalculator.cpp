@@ -75,5 +75,44 @@ int FIFO(int workingSetSize, int trace[1000])
 
 int Clock(int workingSetSize, int trace[1000])
 {
-    return 0;
+    printf("Clock called \n");
+
+    int pageFaults = 0;
+    std::unordered_set<int> currentPages;
+    std::unordered_map<int, bool> pageBits;
+
+    for (int i = 0; i < 1000; i++) //trace loop
+    {
+        if (currentPages.size() > workingSetSize &&
+            currentPages.find(trace[i]) == currentPages.end()) //we must remove a page
+        {
+            //iterate through currentPages until you find a page with a bit of 0. Remove that page
+            pageFaults++;
+
+            bool foundPageToRemove = false;
+            for (auto pagesIterator = currentPages.begin(); pagesIterator != currentPages.end(); pagesIterator++)
+            {
+                if (!pageBits[*pagesIterator]) //current page has bit = 0
+                {
+                    currentPages.erase(*pagesIterator);
+                    foundPageToRemove = true;
+                }
+                else 
+                {
+                    pageBits[*pagesIterator] = false;
+                }
+            }
+
+            if ( !foundPageToRemove )
+            {
+                auto pagesIterator = currentPages.begin();
+                currentPages.erase(*pagesIterator);
+            }
+        }
+
+        currentPages.insert(trace[i]);
+        pageBits[trace[i]] = 1;
+    }
+
+    return pageFaults;
 }
